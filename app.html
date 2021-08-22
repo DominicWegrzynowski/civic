@@ -53,8 +53,51 @@
         </nav>
         <!--CONTENT-->
         <main class="flex-shrink-0">
-            <div class="container col-xxl-8 px-4 py-5">
-                
+            <div class="container col-xxl-8 px-4 py-5 mt-5">
+                <div class="row g-5 row-cols-1 row-cols-md-2">
+                    <div class="col border-end border-2">
+                        <h1 class="display-5 fw-bold lh-1 secondary-font"> CIVIC: A JavaScript Challenge</h1>
+                        <h4 class="lead">
+                            CIVIC is a JavaScript challenge which displays the power of loops, functions, strings, and DOM manipulation.
+                        </h4>
+                        <h2 class="mt-5 border-bottom border-2">Instructions:</h2>
+                        <p>
+                            "Enter a word sentance or phrase and press the button to check if it is a palindrome."
+                        </p>
+                    </div>
+                    <div class="col">
+                        <form class="row gy-2 gx-3">
+                            <div class="col">
+                                <h4>Enter a word, sentance or phrase:</h4>
+                                <input id="userInput"
+                                       type="text" 
+                                       class="form-control" 
+                                       placeholder="'Civic'" 
+                                       value="" 
+                                       aria-label="User Input"
+                                >
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <button id="btnSubmit"
+                                        type="button"
+                                        class="btn btn-primary btn-lg mt-1"
+                                >
+                                Check for Palindrome</button>
+                            </div>
+                        </form>
+                        <h2 class="mt-5 border-bottom border-2">Results</h2>
+                        <div id="results-palindrome" class="mt-1 alert alert-success" role="alert">
+                            <h4 class="alert-heading">Well done!</h4>
+                            <p id="palindrome"></p>
+                            <hr>
+                        </div>
+                        <div id="results-non-palindrome" class="mt-1 alert alert-danger" role="alert">
+                            <h4 class="alert-heading">Nope!</h4>
+                            <p id="word"></p>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
         <!--FOOTER-->
@@ -99,6 +142,9 @@
         </script>
         <!--Custom JS-->
         <script src="/js/site.js"></script>
+        <script>
+            document.getElementById("btnSubmit").addEventListener("click", getString);
+        </script>
     </body>
 
 </html>

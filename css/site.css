@@ -74,3 +74,11 @@ pre[class*="language-"] {
 .secondary-font {
     font-family: 'Roboto Mono', monospace;
 }
+
+#results-palindrome {
+    display: none;
+}
+
+#results-non-palindrome {
+    display: none;
+}
