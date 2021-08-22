@@ -48,7 +48,7 @@ function displayResults(output, userInput) {
     let string = document.getElementById('word');
     let wordResults = document.getElementById('results-non-palindrome');
 
-    if(output.isPalindrome === true) {
+    if(output.isPalindrome === true && userInput != "" ) {
 
         wordResults.style.display = "none";
 
@@ -56,13 +56,16 @@ function displayResults(output, userInput) {
         palindrome.innerHTML = `${output.endString} is a palindrome!`;
 
     }   
-    else if (output.isPalindrome === false) {
+    else if (output.isPalindrome === false && userInput != "") {
 
         palindromeResults.style.display = "none";
 
         wordResults.style.display = "block";
         string.innerHTML = `${userInput} is not a palindrome!`;
 
+    }
+    else {
+        alert("Please enter something to check!");
     }
     
 

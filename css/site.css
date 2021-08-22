@@ -3,6 +3,7 @@
     --secondary-color: #007bff;
     --dark-color: #292929;
     --white-color: #e7e7e7;
+    --logo-color: #df3030;
 }
 
 body {
@@ -36,7 +37,7 @@ footer .social>a {
 
 footer .social>a:hover {
     opacity: .9;
-    color: var(--secondary-color);
+    color: var(--logo-color);
 }
 
 .bsicon {
@@ -75,6 +76,10 @@ pre[class*="language-"] {
     font-family: 'Roboto Mono', monospace;
 }
 
+.main-color {
+    background-color: var(--logo-color);
+}
+
 #results-palindrome {
     display: none;
 }
@@ -82,3 +87,4 @@ pre[class*="language-"] {
 #results-non-palindrome {
     display: none;
 }
+
