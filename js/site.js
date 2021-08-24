@@ -1,71 +1,46 @@
 function getString() {
 
-    let userInput = String(document.getElementById('userInput').value);
+    document.getElementById("alert").classList.add("invisible");
 
-    if(typeof(userInput) === "string") {
+    let userInput = String(document.getElementById("userInput").value);
 
-        let acceptedLetters = /[^a-z]/g;
-        let verifiedString = userInput.toLowerCase().replace(acceptedLetters, '');
-        let output = checkPalindrome(verifiedString);
+    let returnObj = checkForPalindrome(userString);
 
-        displayResults(output, userInput);
+    displayMessage(returnObj)
 
-    }
-    else {
-        alert("Error: Please enter a string");
-    }
-    
 }
 
-function checkPalindrome(verifiedString) {
+function checkForPalindrome(userString) {
 
-    let reversedArray = [];
-    let startString = verifiedString
-    let isPalindrome = false;
+    userString = userString.toLowerCase();
+    
+    //remove spaces and special characters
+    let regex = /[^a-z0-9]/gi;
+    userString = userString.replace(regex, "");
 
-    for(let i = verifiedString.length - 1; i >= 0; i--) {
-        
-        reversedArray += verifiedString[i];
+    let reversedString = [];
+    let returnObj = {};
 
+    for (let index = userString.length - 1; index >= 0; index--) {
+        reversedString += userString[index];
     }
 
-    let endString = reversedArray.toString();
-
-    if(startString === endString) {
-
-        isPalindrome = true;
-
+    if(reversedString === userString) {
+        returnObj.msg = "Well done! You entered a palindrome";
+    } 
+    else {
+        returnObj.msg = "Sorry! You did not enter a palindrome"
     }
 
-    return { endString, isPalindrome };
+    returnObj.reversed = reversedString;
+
+    return returnObj;
+
 }
 
-function displayResults(output, userInput) {
-    
-    let palindrome = document.getElementById('palindrome');
-    let palindromeResults = document.getElementById('results-palindrome');
+function displayMessage(returnObj) {
 
-    let string = document.getElementById('word');
-    let wordResults = document.getElementById('results-non-palindrome');
-
-    if(output.isPalindrome === true && userInput != "" ) {
-
-        wordResults.style.display = "none";
-
-        palindromeResults.style.display = "block";
-        palindrome.innerHTML = `${output.endString} is a palindrome!`;
-
-    }   
-    else if (output.isPalindrome === false && userInput != "") {
-
-        palindromeResults.style.display = "none";
-
-        wordResults.style.display = "block";
-        string.innerHTML = `${userInput} is not a palindrome!`;
-
-    }
-    else {
-        alert("Please enter something to check!");
-    }
-    
+    document.getElementById("alertHeader").innerHTML = returnObj.msg;
+    document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
+    document.getElementById("alert").classList.remove("invisible");
 }

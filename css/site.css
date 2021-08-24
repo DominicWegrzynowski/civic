@@ -80,11 +80,6 @@ pre[class*="language-"] {
     background-color: var(--logo-color);
 }
 
-#results-palindrome {
+.app>.invisible {
     display: none;
 }
-
-#results-non-palindrome {
-    display: none;
-}
-
