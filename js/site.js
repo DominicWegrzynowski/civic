@@ -26,7 +26,7 @@ function checkPalindrome(verifiedString) {
     for(let i = verifiedString.length - 1; i >= 0; i--) {
         
         reversedArray += verifiedString[i];
-1
+
     }
 
     let endString = reversedArray.toString();
@@ -68,5 +68,4 @@ function displayResults(output, userInput) {
         alert("Please enter something to check!");
     }
     
-
 }
