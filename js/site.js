@@ -1,71 +1,56 @@
 function getString() {
 
-    let userInput = String(document.getElementById('userInput').value);
-
-    if(typeof(userInput) === "string") {
-
-        let acceptedLetters = /[^a-z]/g;
-        let verifiedString = userInput.toLowerCase().replace(acceptedLetters, '');
-        let output = checkPalindrome(verifiedString);
-
-        displayResults(output, userInput);
-
-    }
-    else {
-        alert("Error: Please enter a string");
-    }
     
+
+    let userInput = String(document.getElementById("userInput").value);
+
+    let returnObj = checkForPalindrome(userInput);
+
+    displayMessage(returnObj)
+
 }
 
-function checkPalindrome(verifiedString) {
+function checkForPalindrome(userInput) {
 
-    let reversedArray = [];
-    let startString = verifiedString
-    let isPalindrome = false;
+    userInput= userInput.toLowerCase();
+    
+    let regex = /[^a-z0-9]/gi;
+    userInput= userInput.replace(regex, "");
 
-    for(let i = verifiedString.length - 1; i >= 0; i--) {
-        
-        reversedArray += verifiedString[i];
+    let reversedString = [];
+    let returnObj = {};
 
+    for (let index = userInput.length - 1; index >= 0; index--) {
+        reversedString += userInput[index];
     }
 
-    let endString = reversedArray.toString();
-
-    if(startString === endString) {
-
-        isPalindrome = true;
-
+    if(reversedString === userInput) {
+        returnObj.msg = "Well done! You entered a palindrome";
+    } 
+    else {
+        returnObj.msg = "Sorry! You did not enter a palindrome"
     }
 
-    return { endString, isPalindrome };
+    returnObj.reversed = reversedString;
+
+    return returnObj;
+
 }
 
-function displayResults(output, userInput) {
-    
-    let palindrome = document.getElementById('palindrome');
-    let palindromeResults = document.getElementById('results-palindrome');
+function displayMessage(returnObj) {
 
-    let string = document.getElementById('word');
-    let wordResults = document.getElementById('results-non-palindrome');
+    document.getElementById("alertHeading").innerHTML = returnObj.msg;
+    document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
 
-    if(output.isPalindrome === true && userInput != "" ) {
-
-        wordResults.style.display = "none";
-
-        palindromeResults.style.display = "block";
-        palindrome.innerHTML = `${output.endString} is a palindrome!`;
-
-    }   
-    else if (output.isPalindrome === false && userInput != "") {
-
-        palindromeResults.style.display = "none";
-
-        wordResults.style.display = "block";
-        string.innerHTML = `${userInput} is not a palindrome!`;
-
+    if(returnObj.msg === "Well done! You entered a palindrome") {
+        document.getElementById('alert').classList.remove("alert-danger");
+        document.getElementById('alert').classList.add("alert-success");
+        document.getElementById("alert").classList.remove("invisible");
     }
-    else {
-        alert("Please enter something to check!");
+    if(returnObj.msg === "Sorry! You did not enter a palindrome") {
+        document.getElementById('alert').classList.remove("alert-success");
+        document.getElementById('alert').classList.add("alert-danger");
+        document.getElementById("alert").classList.remove("invisible");
     }
-    
+
 }
