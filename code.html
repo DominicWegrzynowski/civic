@@ -61,38 +61,92 @@
         </nav>
         <!--CONTENT-->
         <main class="flex-shrink-0">
-            <div class="container my-5 py-4 px-5 mt-5">
-                <h2 class="border-1 border-bottom border-dark secondary-font">The Code For CIVIC:</h2>
+            <div class="container my-5 mt-5 py-4 px-5">
+                <!-- HEADER -->
+                <div class="row border-1 border-bottom border-dark pb-md-2">
+                    <div class="col">
+                        <h1 class="secondary-font pt-3 pt-md-5"><strong>CIVIC's Code:</strong></h1>
+                    </div>
+                    <div class="col d-flex justify-content-center ps-md-5 ms-md-5">
+                        <img class="ms-md-5" src="/img/civic-logo.svg" width="150" height="150" alt="fizz buzz logo">
+                    </div>
+                </div>
+                    
                 <div class="row row-cols-1 row-cols-lg-2">
                     <!-- Code Window -->
-                    <div class="col-lg-8">
+                    <div class="col-lg-7 mt-md-4 ">
                         <pre class="line-numbers">
                             <code class="language-javascript">
-                                function firstName(string fullName) {
-                                    alert(
-                                        fullName
-                                    );
+                                function getString() {
+                                
+                                    let userInput = String(document.getElementById("userInput").value);
+                                
+                                    let returnObj = checkForPalindrome(userInput);
+                                
+                                    displayMessage(returnObj)
+                                
+                                }
+                                
+                                function checkForPalindrome(userInput) {
+                                
+                                    userInput= userInput.toLowerCase();
+                                    
+                                    let regex = /[^a-z0-9]/gi;
+                                    userInput= userInput.replace(regex, "");
+                                
+                                    let reversedString = [];
+                                    let returnObj = {};
+                                
+                                    for (let index = userInput.length - 1; index >= 0; index--) {
+                                        reversedString += userInput[index];
+                                    }
+                                
+                                    if(reversedString === userInput) {
+                                        returnObj.msg = "Well done! You entered a palindrome";
+                                    } 
+                                    else {
+                                        returnObj.msg = "Sorry! You did not enter a palindrome"
+                                    }
+                                
+                                    returnObj.reversed = reversedString;
+                                
+                                    return returnObj;
+                                
+                                }
+                                
+                                function displayMessage(returnObj) {
+                                
+                                    document.getElementById("alertHeading").innerHTML = returnObj.msg;
+                                    document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
+                                
+                                    if(returnObj.msg === "Well done! You entered a palindrome") {
+                                        document.getElementById("alert").classList.remove("alert-danger");
+                                        document.getElementById("alert").classList.add("alert-success");
+                                        document.getElementById("alert").classList.remove("invisible");
+                                    }
+                                    if(returnObj.msg === "Sorry! You did not enter a palindrome") {
+                                        document.getElementById("alert").classList.remove("alert-success");
+                                        document.getElementById("alert").classList.add("alert-danger");
+                                        document.getElementById("alert").classList.remove("invisible");
+                                    }
+                                
                                 }
 
-                                function middleName(string middleName) {
-                                    alert(
-                                        lastName
-                                    );
-                                }
-
-                                function lastName(string lastName) {
-                                    alert(
-                                        lastName
-                                    );
-                                }
                             </code>
                         </pre>
                     </div>
                     <!-- Code Description -->
-                    <div class="col-lg-4">
-                        <p>The Code is structured in one function.</p>
-                        <h5>Print Name</h5>
-                        <p>PrintName consists of three functions that are each responsible for printing one part of a name. firstName is responsible for printing the first name via the fullName parameter. middleName is responsible for printing the middle name via the middle name parameter. lastName is responsible for printing the last name via the lastName parameter.</p>
+                    <div class="col-lg-5">
+                        <h4 class="text-center"><strong>The Design:</strong></h4>
+                        <p>To keep the code as clean as possible, the program is encapsulated into three functions:</p>
+                        <ul>
+                            <li><h5>getString</h5></li>
+                            <p>This function is responsible for gathering and validating user input. First, it stores the value of the userInput element into a "userInput" variable and castes it to a string. Next, there is an object variable called "returnObj" which is assigned to the object returned from the checkForPalindrome function. It passes the "userInput" variable as an argument into this function. Lastly, it calls the displayMessage function, passing it the "returnObj" object varible.   </p>
+                            <li><h5>checkForPalindrome</h5></li>
+                            <p>This function is responsible for formatting the "userInput" string along with handling which message should be returned based on whether or not the user enters a palindrome. It does this by first converting the "userInput" string to lowercase. Next, is declared a regular expression variable, it then uses this regular expression as an argument in the "replace" method and replaces all instances of any special character not in this regular expression with a "". Next, it creates an array called "reversedString" and an object "returnObj"(the function's output). It then, loops backwards adding the last position of the "userInput" array of characters to the first position of the "reversedString" variable, completely reversing the string. After the loop is finished, there is a conditional checking whether or not the "reversedString" variable is the same as the original "userInput" string, if so it assigns the "msg" property of the "returnObj" to a message confirming that it is a palindrome, if not it sets this property to a message informing that it is not a palindrome. Lastly, it assigns the "reversed" property of the "returnObj" to the "reversedString" and returns the "returnObj"</p>
+                            <li><h5>displayMessage</h5></li>
+                            <p>This function is soley responsible for modifying the DOM based on whether or not the returnObj is a palindrome. It does this by first assiging the "alertHeading" innerHTML to the "returnObj.msg" property. Next, it updates the innerHTML of the "msg" element. Lastly, it uses two conditionals to check whether or not the "returnObj.msg" is a palindrome. Within each conditional, it updates the "alert" element's classList property to get the appropriate "alert-success" or "alert-danger" alert message. </p>
+                        </ul>
                     </div>
                 </div>
             </div>

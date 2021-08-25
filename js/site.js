@@ -1,31 +1,30 @@
 function getString() {
 
-    document.getElementById("alert").classList.add("invisible");
+    
 
     let userInput = String(document.getElementById("userInput").value);
 
-    let returnObj = checkForPalindrome(userString);
+    let returnObj = checkForPalindrome(userInput);
 
     displayMessage(returnObj)
 
 }
 
-function checkForPalindrome(userString) {
+function checkForPalindrome(userInput) {
 
-    userString = userString.toLowerCase();
+    userInput= userInput.toLowerCase();
     
-    //remove spaces and special characters
     let regex = /[^a-z0-9]/gi;
-    userString = userString.replace(regex, "");
+    userInput= userInput.replace(regex, "");
 
     let reversedString = [];
     let returnObj = {};
 
-    for (let index = userString.length - 1; index >= 0; index--) {
-        reversedString += userString[index];
+    for (let index = userInput.length - 1; index >= 0; index--) {
+        reversedString += userInput[index];
     }
 
-    if(reversedString === userString) {
+    if(reversedString === userInput) {
         returnObj.msg = "Well done! You entered a palindrome";
     } 
     else {
@@ -40,7 +39,18 @@ function checkForPalindrome(userString) {
 
 function displayMessage(returnObj) {
 
-    document.getElementById("alertHeader").innerHTML = returnObj.msg;
+    document.getElementById("alertHeading").innerHTML = returnObj.msg;
     document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
-    document.getElementById("alert").classList.remove("invisible");
+
+    if(returnObj.msg === "Well done! You entered a palindrome") {
+        document.getElementById('alert').classList.remove("alert-danger");
+        document.getElementById('alert').classList.add("alert-success");
+        document.getElementById("alert").classList.remove("invisible");
+    }
+    if(returnObj.msg === "Sorry! You did not enter a palindrome") {
+        document.getElementById('alert').classList.remove("alert-success");
+        document.getElementById('alert').classList.add("alert-danger");
+        document.getElementById("alert").classList.remove("invisible");
+    }
+
 }
